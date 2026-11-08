@@ -105,5 +105,28 @@
     </div>
   </section>
 </main>
+<script>
+  // Descargar de verdad: algunos navegadores muestran la imagen en vez de bajarla
+  document.querySelectorAll(".tarjeta").forEach((enlace) => {
+    enlace.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const nombre = decodeURIComponent(enlace.getAttribute("href").split("/").pop());
+      try {
+        const respuesta = await fetch(enlace.href);
+        if (!respuesta.ok) throw new Error(respuesta.status);
+        const url = URL.createObjectURL(await respuesta.blob());
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = nombre;
+        document.body.append(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      } catch (error) {
+        window.open(enlace.href, "_blank");   // plan B: abrirla para guardarla a mano
+      }
+    });
+  });
+</script>
 </body>
 </html>
