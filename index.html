@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quipu · Todo lo que usás en el día, en un mismo lugar</title>
+<meta name="description" content="Quipu: un asistente de escritorio con personajes que te acompañan. Foco, Notas, Agenda, Tiempo y Sonidos en una consola.">
+<link rel="icon" href="img/favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=VT323&display=swap">
+<style>
+  :root { --fondo: #0d1730; --fondo2: #0a1226; --tarjeta: #16254a; --crema: #f5eedc; --texto: #c9d2e8;
+          --apagado: #9fb0d6; --oro: #f4b83a; --oro-osc: #b9821a; --azul: #2f5fb3; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--fondo); color: var(--crema); font-family: 'Fredoka', 'Trebuchet MS', sans-serif; }
+  a { color: var(--oro); }
+  img { max-width: 100%; display: block; }
+  .ancho { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .retro { font-family: 'VT323', monospace; font-size: 26px; color: var(--oro); letter-spacing: 2px; }
+
+  /* Barra de arriba */
+  header { position: sticky; top: 0; z-index: 10; background: var(--fondo2); border-bottom: 3px solid var(--azul); }
+  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; padding: 12px 24px; max-width: 1200px; margin: 0 auto; }
+  nav .logo img { height: 44px; width: auto; }
+  nav .links { display: flex; flex-wrap: wrap; gap: 6px 22px; flex: 1 1 auto; font-size: 17px; font-weight: 500; }
+  nav .links a { color: var(--crema); text-decoration: none; }
+  nav .links a:hover { color: var(--oro); }
+  .boton { display: inline-block; background: var(--oro); color: var(--fondo); text-decoration: none; font-weight: 700;
+           border-radius: 12px; box-shadow: 0 4px 0 var(--oro-osc); }
+  .boton:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--oro-osc); }
+  nav .boton { padding: 10px 20px; font-size: 16px; }
+
+  /* Inicio */
+  #inicio { text-align: center; padding: 90px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  #inicio .placa { width: min(520px, 90%); }
+  h1 { margin: 0; font-size: clamp(36px, 6vw, 62px); line-height: 1.05; font-weight: 700; max-width: 900px; }
+  #inicio p { margin: 0; max-width: 760px; font-size: 20px; line-height: 1.55; color: var(--texto); }
+
+  .crema { background: var(--crema); color: var(--fondo); }
+  .crema p { color: #24314f; }
+  .por-que { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+  .por-que h2 { margin: 0; flex: 1 1 280px; font-size: 40px; line-height: 1.1; }
+  .por-que p { margin: 0; flex: 999 1 460px; font-size: 20px; line-height: 1.6; }
+
+  /* El asistente */
+  #asistente { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding: 100px 24px; }
+  #asistente .foto { flex: 1 1 420px; border-radius: 24px; }
+  #asistente .info { flex: 999 1 460px; display: flex; flex-direction: column; gap: 22px; }
+  h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.1; font-weight: 700; }
+  .info > p { margin: 0; font-size: 19px; line-height: 1.55; color: var(--texto); }
+  .funciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .funciones div { background: var(--tarjeta); border-radius: 14px; padding: 16px 18px; }
+  .funciones b { display: block; font-weight: 600; font-size: 19px; color: var(--oro); }
+  .funciones span { display: block; font-size: 16px; line-height: 1.45; color: var(--texto); margin-top: 4px; }
+  .descarga { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 6px; }
+  .descarga .boton { font-size: 20px; padding: 16px 30px; }
+  .descarga small { font-size: 15px; color: var(--apagado); }
+  .aviso-windows { margin: 0; font-size: 14px; line-height: 1.5; color: var(--apagado); }
+
+  /* Personajes */
+  #personajes { padding: 90px 24px; }
+  #personajes header { position: static; background: none; border: 0; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+  .familia { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .personaje { background: var(--tarjeta); border-radius: 20px; border-top: 8px solid var(--color); padding: 22px;
+               display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+  .personaje img { height: 210px; width: auto; object-fit: contain; }
+  .personaje b { font-size: 22px; }
+  .personaje em { font-style: normal; color: var(--texto); }
+  .personaje p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--texto); }
+
+  /* Familia de apps */
+  .apps { display: flex; flex-wrap: wrap; gap: 16px; padding-bottom: 90px; }
+  .apps div { flex: 1 1 260px; border: 2px dashed #4a6aa8; border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .apps div.lista { border: 2px solid var(--oro); }
+  .apps .retro { font-size: 20px; }
+  .apps b { font-size: 21px; font-weight: 600; }
+  .apps span:last-child { font-size: 16px; color: var(--texto); }
+
+  /* Sobre mí */
+  .sobre { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; padding: 90px 24px; max-width: 1100px; margin: 0 auto; }
+  .sobre img { flex: 1 1 320px; max-width: 420px; border-radius: 24px; }
+  .sobre div { flex: 999 1 420px; display: flex; flex-direction: column; gap: 16px; }
+  .sobre .retro { color: var(--azul); }
+  .sobre p { margin: 0; font-size: 20px; line-height: 1.6; }
+
+  /* Comentarios */
+  #comentarios { max-width: 760px; margin: 0 auto; padding: 90px 24px; display: flex; flex-direction: column; gap: 20px; }
+  form { background: var(--tarjeta); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+  label { font-size: 16px; font-weight: 500; }
+  input, textarea { font-family: inherit; font-size: 17px; padding: 12px 14px; border-radius: 10px; border: 2px solid #3d5590;
+                    background: var(--fondo); color: var(--crema); }
+  input:focus, textarea:focus { outline: none; border-color: var(--oro); }
+  textarea { resize: vertical; min-height: 110px; }
+  form .pie { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  form button { font-family: inherit; background: var(--oro); color: var(--fondo); border: 0; font-weight: 700; font-size: 18px;
+                padding: 12px 26px; border-radius: 12px; min-height: 48px; cursor: pointer; box-shadow: 0 4px 0 var(--oro-osc); }
+  form button:disabled { opacity: .6; cursor: default; }
+  #estado { font-size: 15px; color: var(--apagado); }
+  .comentario { background: var(--tarjeta); border-radius: 14px; padding: 14px 18px; }
+  .comentario b { color: var(--oro); }
+  .comentario small { color: var(--apagado); margin-left: 8px; }
+  .comentario p { margin: 6px 0 0; line-height: 1.5; color: var(--texto); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .respuesta { margin-top: 12px; background: var(--fondo); border-radius: 10px; padding: 10px 14px; }
+  .respuesta b { color: var(--crema); }
+  #lista { display: flex; flex-direction: column; gap: 12px; }
+  .vacio { text-align: center; color: var(--apagado); }
+
+  footer { background: var(--fondo2); border-top: 3px solid var(--azul); }
+  footer .ancho { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding: 32px 24px; }
+  footer img { height: 34px; width: auto; }
+  footer a { display: flex; align-items: center; gap: 8px; color: var(--crema); text-decoration: none; font-size: 17px; }
+  footer small { font-size: 14px; color: var(--apagado); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="#inicio" aria-label="Quipu, ir al inicio"><img src="img/placa.png" alt="Quipu"></a>
+    <div class="links">
+      <a href="#asistente">El asistente</a>
+      <a href="#personajes">Personajes</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#comentarios">Comentarios</a>
+      <a href="descargables.html">Descargables</a>
+    </div>
+    <a class="boton" href="#asistente">Descargar</a>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio">
+    <img class="placa" src="img/placa.png" alt="Quipu">
+    <span class="retro">¿QUÉ ES QUIPU?</span>
+    <h1>Todo lo que usás en el día, en un mismo lugar.</h1>
+    <p>En quechua, <em>khipu</em> significa nudo. Era el sistema que usaban los incas para registrar información con cuerdas de colores y nudos: según el tipo de nudo, su posición y el color de cada cuerda, guardaba cantidades, censos, cosechas y tributos de todo el Tawantinsuyu. Los quipucamayoc eran los encargados de anudarlos y leerlos. Quipu, el asistente, toma ese nombre y ese sentido: una herramienta para registrar y ordenar tu día, hecha desde Latinoamérica y con nuestras raíces.</p>
+  </section>
+
+  <section class="crema">
+    <div class="por-que">
+      <h2>Por qué nace Quipu</h2>
+      <p>Los desarrollos más útiles nacen de un problema concreto. Cada app de Quipu parte de una pregunta: ¿qué herramientas usamos a diario que hoy están dispersas? La respuesta se convierte en una aplicación que las reúne en un solo lugar.</p>
+    </div>
+  </section>
+
+  <section id="asistente" class="ancho">
+    <img class="foto" src="img/quipu.png" alt="La consola de Quipu abierta, con un personaje asomándose">
+    <div class="info">
+      <span class="retro">EL ASISTENTE</span>
+      <h2>Una consola en tu escritorio, con un personaje que te acompaña.</h2>
+      <p>Nació de una necesidad propia: las herramientas que uso a diario ya existían, pero estaban repartidas en distintos programas. El asistente las reúne en una sola consola.</p>
+      <div class="funciones">
+        <div><b>Foco</b><span>Un temporizador para concentrarte, con la cuenta regresiva a la vista.</span></div>
+        <div><b>Notas</b><span>Carpetas de colores, pendientes, QR para el celu y notas compartidas con un código.</span></div>
+        <div><b>Agenda</b><span>Tus eventos, y después te pregunta si los hiciste o querés reprogramar.</span></div>
+        <div><b>Tiempo</b><span>El tiempo del día, siempre a la vista en la pantallita.</span></div>
+        <div><b>Sonidos</b><span>Ambientes para concentrarte, con volumen para cada uno.</span></div>
+        <div><b>Ajustes</b><span>Elegí tu personaje y la consola se viste con sus colores.</span></div>
+      </div>
+      <div class="descarga">
+        <a class="boton" id="descargar" href="https://github.com/ericocho/quipu/releases/latest/download/Instalar-Quipu.exe">Descargar para Windows</a>
+        <small>Gratis · Windows 10 y 11 · Se actualiza solo</small>
+      </div>
+      <p class="aviso-windows">Como Quipu es nuevo, Windows puede mostrar el aviso <b>“Windows protegió su PC”</b>. Tocá <b>Más información</b> y después <b>Ejecutar de todas formas</b>.</p>
+    </div>
+  </section>
+
+  <section id="personajes" class="ancho">
+    <header>
+      <span class="retro">LOS PERSONAJES</span>
+      <h2>Elegí quién te acompaña.</h2>
+    </header>
+    <div class="familia">
+      <article class="personaje" style="--color:#3A5A93"><img src="img/personajes/moreira.png" alt=""><b>El gaucho</b><em>Juan Moreira (1829-1874)</em>
+        <p>Gaucho bonaerense real, perseguido por la justicia de su tiempo tras un conflicto con las autoridades locales. Murió en Lobos en 1874, enfrentado a una partida policial. Eduardo Gutiérrez convirtió su vida en novela y los hermanos Podestá la llevaron al circo criollo, punto de partida del teatro rioplatense. Su figura encarna al gaucho marginado por un sistema que no lo reconocía: la lealtad, el coraje y la tradición de la pampa, con todas sus contradicciones.</p></article>
+      <article class="personaje" style="--color:#4E8A45"><img src="img/personajes/remedios.png" alt=""><b>La Madre de la Patria</b><em>María Remedios del Valle</em>
+        <p>Mujer afroargentina que en 1810 se sumó al Ejército del Norte junto a su marido y sus hijos, que murieron en campaña. Fue enfermera y combatiente: Belgrano la nombró capitana y los soldados la llamaron Madre de la Patria. Herida y capturada, logró escapar. Terminó sus días en la pobreza y el reconocimiento del Estado llegó tarde. Hoy, cada 8 de noviembre, el Día Nacional de los/as Afroargentinos/as y de la Cultura Afro honra su memoria.</p></article>
+      <article class="personaje" style="--color:#7D8B4A"><img src="img/personajes/anki.png" alt=""><b>Anki</b><em>Mi dinosaurio favorito</em>
+        <p>El anquilosaurio vivió a fines del Cretácico, hace unos 68 a 66 millones de años, en lo que hoy es América del Norte. Era herbívoro y estaba cubierto por una armadura de placas óseas, con una cola terminada en una maza que usaba para defenderse. Podía medir entre 6 y 8 metros de largo. Es mi dinosaurio favorito, y en Quipu es el más tierno de la familia.</p></article>
+      <article class="personaje" style="--color:#488848"><img src="img/personajes/pachamama.png" alt=""><b>Pachamama</b><em>La madre tierra</em>
+        <p>En tiempos en que predominan modelos productivos que extraen los recursos naturales sin contemplar su tiempo de regeneración ni el impacto sobre el ambiente, la Pachamama nos propone otra mirada. Más allá de la cosmovisión andina de la que nace, lo valioso es lo que trae consigo: los valores de conservación, de cuidado y de respeto por la tierra que nos sostiene.</p></article>
+      <article class="personaje" style="--color:#8E90A3"><img src="img/personajes/luna.png" alt=""><b>Luna</b><em>Mi gata</em>
+        <p>Luna es mi gata, compañera de casa y de paseos con su arnés de huellitas. Gris y blanca, de pelo largo y ojos amarillo verdosos, en Quipu representa la compañía de todos los días: esa presencia tranquila que está ahí mientras trabajás, estudiás o simplemente estás.</p></article>
+      <article class="personaje" style="--color:#A0714D"><img src="img/personajes/compa.png" alt=""><b>Compa</b><em>El dibujo de Cristian</em>
+        <p>Compa es un personaje especial por lo que representa. Nace de un dibujo que hizo Cristian en las tardes de dibujo que compartíamos. Darle vida en Quipu es otra pequeña forma de recordarlo y de que siga acompañando.</p></article>
+    </div>
+  </section>
+
+  <section class="ancho" aria-labelledby="titulo-familia">
+    <span class="retro" id="titulo-familia">LA FAMILIA QUIPU</span>
+    <div class="apps" style="margin-top:18px">
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Asistente de escritorio</b><span>Para Windows.</span></div>
+      <div><span class="retro" style="color:var(--apagado)">PRONTO</span><b>Quipu para celular</b><span>El asistente en tu Android, con tus mismos datos.</span></div>
+      <div><span class="retro" style="color:var(--apagado)">EN EL TALLER</span><b>Nuevos desarrollos</b><span>Nuevas aplicaciones que reúnen, en un solo lugar, lo que usamos cada día.</span></div>
+    </div>
+  </section>
+
+  <section id="sobre-mi" class="crema">
+    <div class="sobre">
+      <img src="img/eric-luna.jpg" alt="Eric con Luna, su gata">
+      <div>
+        <span class="retro">SOBRE MÍ</span>
+        <h2>Hola, soy Eric.</h2>
+        <!-- CAMBIÁ ESTE PÁRRAFO POR TU PRESENTACIÓN -->
+        <p>Soy Licenciado en Relaciones Internacionales, Diplomado en Psicología Social y Educación y Operador Socio-Comunitario, y hoy curso la Tecnicatura en Programación. Quipu nace de juntar esos mundos: pensar en las personas y resolver con tecnología los problemas concretos de todos los días.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="comentarios">
+    <span class="retro">COMENTARIOS</span>
+    <h2>Dejame tu comentario</h2>
+    <form id="formulario">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" maxlength="40" required autocomplete="given-name">
+      <label for="texto">Comentario</label>
+      <textarea id="texto" maxlength="600" required></textarea>
+      <div class="pie">
+        <span id="estado" role="status"></span>
+        <button type="submit" id="publicar">Publicar</button>
+      </div>
+    </form>
+    <div id="lista" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="ancho">
+    <img src="img/placa.png" alt="Quipu">
+    <!-- CAMBIÁ TU_USUARIO POR TU USUARIO DE INSTAGRAM (en el enlace y en el texto) -->
+    <a href="https://instagram.com/quipu_app">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg>
+      <span>@quipu_app</span>
+    </a>
+    <small>© 2026 Quipu · Hecho en Argentina</small>
+  </div>
+</footer>
+
+<script>
+  // --- Comentarios, guardados en Firebase (Firestore) ---------------------------
+  const BASE = "https://firestore.googleapis.com/v1/projects/quipu-a14a5/databases/(default)/documents";
+  const $ = (id) => document.getElementById(id);
+
+  function dibujar(comentarios) {
+    const lista = $("lista");
+    lista.replaceChildren();
+    if (!comentarios.length) {
+      const p = document.createElement("p");
+      p.className = "vacio";
+      p.textContent = "Todavía no hay comentarios. ¡Sé el primero!";
+      lista.append(p);
+      return;
+    }
+    for (const c of comentarios) {
+      const caja = document.createElement("div");
+      caja.className = "comentario";
+      const nombre = document.createElement("b");
+      nombre.textContent = c.nombre;
+      const fecha = document.createElement("small");
+      fecha.textContent = new Date(c.fecha).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
+      const texto = document.createElement("p");
+      texto.textContent = c.texto;
+      caja.append(nombre, fecha, texto);
+      if (c.respuesta) {
+        const r = document.createElement("div");
+        r.className = "respuesta";
+        const quien = document.createElement("b");
+        quien.textContent = "Respuesta de Eric";
+        const dice = document.createElement("p");
+        dice.textContent = c.respuesta;
+        r.append(quien, dice);
+        caja.append(r);
+      }
+      lista.append(caja);
+    }
+  }
+
+  async function cargar() {
+    try {
+      const r = await fetch(`${BASE}:runQuery`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ structuredQuery: {
+          from: [{ collectionId: "comentarios" }],
+          orderBy: [{ field: { fieldPath: "fecha" }, direction: "DESCENDING" }],
+          limit: 50,
+        } }),
+      });
+      const filas = await r.json();
+      dibujar(filas.filter((f) => f.document).map((f) => ({
+        nombre: f.document.fields.nombre.stringValue,
+        texto: f.document.fields.texto.stringValue,
+        fecha: f.document.fields.fecha.timestampValue,
+        respuesta: f.document.fields.respuesta?.stringValue || "",
+      })));
+    } catch (e) {
+      $("lista").textContent = "No se pudieron cargar los comentarios.";
+    }
+  }
+
+  $("formulario").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const nombre = $("nombre").value.trim(), texto = $("texto").value.trim();
+    if (!nombre || !texto) return;
+    $("publicar").disabled = true;
+    $("estado").textContent = "Publicando…";
+    try {
+      const r = await fetch(`${BASE}/comentarios`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: {
+          nombre: { stringValue: nombre },
+          texto: { stringValue: texto },
+          fecha: { timestampValue: new Date().toISOString() },
+        } }),
+      });
+      if (!r.ok) throw new Error(r.status);
+      $("texto").value = "";
+      $("estado").textContent = "¡Gracias por tu comentario!";
+      cargar();
+    } catch (e) {
+      $("estado").textContent = "No se pudo publicar. Probá de nuevo en un rato.";
+    }
+    $("publicar").disabled = false;
+  });
+
+  cargar();
+</script>
+</body>
+</html>
