@@ -39,6 +39,25 @@
   .tarjeta b { font-weight: 500; font-size: 16px; }
   .tarjeta span { align-self: flex-start; background: var(--oro); color: var(--fondo); font-weight: 700; border-radius: 10px; padding: 6px 14px; font-size: 15px; }
   .vacio { color: var(--apagado); font-size: 18px; }
+  /* Pantallas chicas (celulares) */
+  @media (max-width: 700px) {
+    nav { padding: 8px 16px; gap: 8px 12px; }
+    nav img { height: 32px; }
+    nav .boton { margin-left: auto; padding: 8px 14px; font-size: 14px; }
+    nav .links { order: 3; flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; gap: 18px; font-size: 15px;
+                 padding-bottom: 2px; scrollbar-width: none; }
+    nav .links::-webkit-scrollbar { display: none; }
+    nav .links a { white-space: nowrap; }
+    main { padding: 32px 16px 60px; }
+    .retro { font-size: 22px; }
+    .intro { font-size: 17px; }
+    .indice a { padding: 6px 12px; font-size: 15px; }
+    section { padding-top: 36px; scroll-margin-top: 110px; }
+    .galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .tarjeta { padding: 8px; border-radius: 12px; }
+    .tarjeta b { font-size: 13px; overflow-wrap: anywhere; }
+    .tarjeta span { font-size: 13px; padding: 5px 10px; }
+  }
 </style>
 </head>
 <body>
@@ -53,7 +72,6 @@
           <a href="descargables.html" aria-current="page">Descargables</a>
         </div>
     <a class="boton" href="index.html#asistente">Descargar</a>
-  </nav>
   </nav>
 </header>
 <main>

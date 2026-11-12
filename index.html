@@ -110,6 +110,41 @@
   footer img { height: 34px; width: auto; }
   footer a { display: flex; align-items: center; gap: 8px; color: var(--crema); text-decoration: none; font-size: 17px; }
   footer small { font-size: 14px; color: var(--apagado); }
+  /* Descarga para Android */
+  #asistente .foto, .sobre img { min-width: 0; }
+  .boton-claro { background: var(--crema); box-shadow: 0 4px 0 #bfb59c; }
+  .boton-claro:active { box-shadow: 0 1px 0 #bfb59c; }
+  .instalar { background: var(--tarjeta); border-radius: 14px; padding: 4px 18px; }
+  .instalar summary { cursor: pointer; padding: 12px 0; font-weight: 600; color: var(--oro); }
+  .instalar ol { margin: 0 0 14px; padding-left: 22px; display: flex; flex-direction: column; gap: 8px;
+                 font-size: 16px; line-height: 1.5; color: var(--texto); }
+  .instalar p { margin: 0 0 14px; font-size: 15px; line-height: 1.5; color: var(--apagado); }
+  footer .derecha { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; }
+
+  /* Pantallas chicas (celulares) */
+  @media (max-width: 700px) {
+    nav { padding: 8px 16px; gap: 8px 12px; }
+    nav .logo img { height: 32px; }
+    nav .boton { margin-left: auto; padding: 8px 14px; font-size: 14px; }
+    nav .links { order: 3; flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; gap: 18px; font-size: 15px;
+                 padding-bottom: 2px; scrollbar-width: none; }
+    nav .links::-webkit-scrollbar { display: none; }
+    nav .links a { white-space: nowrap; }
+    .retro { font-size: 22px; }
+    .ancho { padding: 0 18px; }
+    #inicio { padding: 48px 18px 44px; gap: 16px; }
+    #inicio p, .por-que p, .sobre p { font-size: 17px; }
+    .por-que, .sobre { padding: 52px 18px; gap: 24px; }
+    .por-que h2 { font-size: 30px; }
+    #asistente { padding: 56px 18px; gap: 32px; }
+    .info > p { font-size: 17px; }
+    .descarga .boton { flex: 1 1 100%; text-align: center; font-size: 18px; padding: 14px 20px; }
+    #personajes { padding: 56px 18px; }
+    .personaje img { height: 170px; }
+    .apps { padding-bottom: 56px; }
+    #comentarios { padding: 56px 18px; }
+    footer .ancho { padding: 24px 18px; }
+  }
 </style>
 </head>
 <body>
@@ -149,6 +184,7 @@
       <span class="retro">EL ASISTENTE</span>
       <h2>Una consola en tu escritorio, con un personaje que te acompaña.</h2>
       <p>Nació de una necesidad propia: las herramientas que uso a diario ya existían, pero estaban repartidas en distintos programas. El asistente las reúne en una sola consola.</p>
+      <p>Y también va en tu celu: si conectás tu Google Drive, tus notas y tu agenda te siguen de un aparato al otro.</p>
       <div class="funciones">
         <div><b>Foco</b><span>Un temporizador para concentrarte, con la cuenta regresiva a la vista.</span></div>
         <div><b>Notas</b><span>Carpetas de colores, pendientes, QR para el celu y notas compartidas con un código.</span></div>
@@ -157,10 +193,21 @@
         <div><b>Sonidos</b><span>Ambientes para concentrarte, con volumen para cada uno.</span></div>
         <div><b>Ajustes</b><span>Elegí tu personaje y la consola se viste con sus colores.</span></div>
       </div>
-            <div class="descarga">
-        <a class="boton" id="descargar" href="https://apps.microsoft.com/detail/9MW60L67MV8W">Descargar desde Microsoft Store</a>
-        <small>Gratis · Windows 10 y 11 · Se actualiza solo</small>
+      <div class="descarga">
+        <a class="boton" id="descargar" href="https://apps.microsoft.com/detail/9MW60L67MV8W">Descargar para Windows</a>
+        <a class="boton boton-claro" id="descargar-android" href="https://github.com/quipu-app/quipu-celular/releases/latest/download/Quipu.apk">Descargar para Android</a>
+        <small>Gratis · Windows 10 y 11 desde la Microsoft Store · Android 7 o más nuevo</small>
       </div>
+      <details class="instalar">
+        <summary>¿Cómo instalo la app en Android?</summary>
+        <ol>
+          <li>Desde el celu, tocá <b>Descargar para Android</b> y abrí el archivo <b>Quipu.apk</b> cuando termine.</li>
+          <li>Si Android avisa que no puede instalar apps de esa fuente, tocá <b>Configuración</b>, activá <b>Permitir de esta fuente</b> y volvé atrás.</li>
+          <li>Tocá <b>Instalar</b>. Si aparece Play Protect con “App no reconocida”, tocá <b>Más detalles</b> y después <b>Instalar de todas formas</b>.</li>
+          <li>Abrí Quipu y, si querés tener tus datos de la compu, andá a <b>Ajustes → Google Drive → Conectar</b>.</li>
+        </ol>
+        <p>Esos avisos aparecen porque la app no viene de Google Play. Es la misma versión que uso yo todos los días, firmada siempre con la misma llave.</p>
+      </details>
       <p class="aviso-windows">¿Preferís no usar la Store? <a href="https://github.com/quipu-app/quipu-app.github.io/releases/latest/download/Instalar-Quipu.exe">Descargá el instalador directo</a>. Como no está firmado, Windows puede mostrar el aviso <b>“Windows protegió su PC”</b>: tocá <b>Más información</b> y después <b>Ejecutar de todas formas</b>.</p>
     </div>
   </section>
@@ -190,7 +237,7 @@
     <span class="retro" id="titulo-familia">LA FAMILIA QUIPU</span>
     <div class="apps" style="margin-top:18px">
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Asistente de escritorio</b><span>Para Windows.</span></div>
-      <div><span class="retro" style="color:var(--apagado)">PRONTO</span><b>Quipu para celular</b><span>El asistente en tu Android, con tus mismos datos.</span></div>
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu para celular</b><span>Para Android, con tus mismos datos por Google Drive.</span></div>
       <div><span class="retro" style="color:var(--apagado)">EN EL TALLER</span><b>Nuevos desarrollos</b><span>Nuevas aplicaciones que reúnen, en un solo lugar, lo que usamos cada día.</span></div>
     </div>
   </section>
@@ -232,7 +279,10 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg>
       <span>@quipu_app</span>
     </a>
-    <small>© 2026 Quipu · Hecho en Argentina</small>
+    <div class="derecha">
+      <a href="privacidad.html">Privacidad</a>
+      <small>© 2026 Quipu · Hecho en Argentina</small>
+    </div>
   </div>
 </footer>
 
