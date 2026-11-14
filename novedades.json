@@ -1,7 +1,7 @@
 {
   "android": {
-    "version": "1.2.1",
-    "resumen": "Notas compartidas mediante código",
+    "version": "1.2.2",
+    "resumen": "Arreglo: ya se puede cambiar de personaje",
     "enlace": "https://quipu-app.github.io/#nueva-version"
   }
 }
