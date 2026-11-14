@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quipu · Todo lo que usás en el día, en un mismo lugar</title>
-<meta name="description" content="Quipu: un asistente de escritorio con personajes que te acompañan. Foco, Notas, Agenda, Tiempo y Sonidos en una consola.">
+<title>Quipu Estudio · Todo lo que usás en el día, en un mismo lugar</title>
+<meta name="description" content="Quipu Asistente: un asistente de escritorio con personajes que te acompañan. Foco, Notas, Agenda, Tiempo y Sonidos en una consola.">
 <link rel="icon" href="img/favicon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=VT323&display=swap">
 <style>
@@ -145,6 +145,26 @@
     #comentarios { padding: 56px 18px; }
     footer .ancho { padding: 24px 18px; }
   }
+  /* Quipu Estudio: la palabra debajo de la placa */
+  #inicio .estudio { font-family: 'VT323', monospace; font-size: 19px; letter-spacing: 9px; padding-left: 9px;
+                     color: var(--apagado); margin: -14px 0 20px; }
+
+  /* Nueva versión: la toma del mismo novedades.json que lee la app del celu */
+  #nueva-version { padding: 70px 24px 0; scroll-margin-top: 90px; }
+  .nv-tarjeta { background: var(--tarjeta); border: 3px solid var(--oro); border-radius: 24px; padding: 28px;
+                display: flex; flex-direction: column; gap: 16px; }
+  .nv-novedad { display: flex; gap: 12px; align-items: center; background: var(--fondo); border-radius: 14px;
+                padding: 14px 18px; font-size: 18px; }
+  .nv-novedad svg { flex: none; color: var(--oro); }
+  .nv-botones { display: flex; flex-wrap: wrap; gap: 14px; }
+  .nv-botones .boton { font-size: 18px; padding: 14px 26px; }
+  .nv-datos { margin: 0; font-size: 16px; line-height: 1.5; color: var(--texto); }
+  @media (max-width: 700px) {
+    #inicio .estudio { font-size: 16px; letter-spacing: 7px; padding-left: 7px; margin: -10px 0 14px; }
+    #nueva-version { padding: 40px 18px 0; }
+    .nv-tarjeta { padding: 20px; }
+    .nv-botones .boton { flex: 1 1 100%; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -166,9 +186,10 @@
 <main>
   <section id="inicio">
     <img class="placa" src="img/placa.png" alt="Quipu">
+    <span class="estudio">ESTUDIO</span>
     <span class="retro">¿QUÉ ES QUIPU?</span>
     <h1>Todo lo que usás en el día, en un mismo lugar.</h1>
-    <p>En quechua, <em>khipu</em> significa nudo. Era el sistema que usaban los incas para registrar información con cuerdas de colores y nudos: según el tipo de nudo, su posición y el color de cada cuerda, guardaba cantidades, censos, cosechas y tributos de todo el Tawantinsuyu. Los quipucamayoc eran los encargados de anudarlos y leerlos. Quipu, el asistente, toma ese nombre y ese sentido: una herramienta para registrar y ordenar tu día, hecha desde Latinoamérica y con nuestras raíces.</p>
+    <p>En quechua, <em>khipu</em> significa nudo. Era el sistema que usaban los incas para registrar información con cuerdas de colores y nudos: según el tipo de nudo, su posición y el color de cada cuerda, guardaba cantidades, censos, cosechas y tributos de todo el Tawantinsuyu. Los quipucamayoc eran los encargados de anudarlos y leerlos. Quipu Estudio toma ese nombre y ese sentido: herramientas para registrar y ordenar tu día, hechas desde Latinoamérica y con nuestras raíces.</p>
   </section>
 
   <section class="crema">
@@ -178,10 +199,26 @@
     </div>
   </section>
 
+  <section id="nueva-version" class="ancho" hidden>
+    <div class="nv-tarjeta">
+      <span class="retro" id="nv-version">NUEVA VERSIÓN</span>
+      <h2>Quipu Asistente para celular</h2>
+      <div class="nv-novedad">
+        <svg width="26" height="26" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="5.5" cy="5" r="2.3"/><circle cx="11" cy="5" r="2.3"/><path d="M1.5 13.5c0-3.2 8-3.2 8 0M7.5 13.5c0-3 7-3 7 0"/></svg>
+        <b id="nv-resumen"></b>
+      </div>
+      <div class="nv-botones">
+        <a class="boton" href="https://github.com/quipu-app/quipu-celular/releases/latest/download/Quipu.apk">Descargar para Android</a>
+        <a class="boton boton-claro" href="#asistente">Ver el asistente</a>
+      </div>
+      <p class="nv-datos">Instalala encima de la que ya tenés, sin desinstalar: tus notas, tu agenda y tus ajustes quedan como estaban, y solo se suman las novedades.</p>
+    </div>
+  </section>
+
   <section id="asistente" class="ancho">
     <img class="foto" src="img/quipu.png" alt="La consola de Quipu abierta, con un personaje asomándose">
     <div class="info">
-      <span class="retro">EL ASISTENTE</span>
+      <span class="retro">QUIPU ASISTENTE</span>
       <h2>Una consola en tu escritorio, con un personaje que te acompaña.</h2>
       <p>Nació de una necesidad propia: las herramientas que uso a diario ya existían, pero estaban repartidas en distintos programas. El asistente las reúne en una sola consola.</p>
       <p>Y también va en tu celu: si conectás tu Google Drive, tus notas y tu agenda te siguen de un aparato al otro.</p>
@@ -236,8 +273,8 @@
   <section class="ancho" aria-labelledby="titulo-familia">
     <span class="retro" id="titulo-familia">LA FAMILIA QUIPU</span>
     <div class="apps" style="margin-top:18px">
-      <div class="lista"><span class="retro">DISPONIBLE</span><b>Asistente de escritorio</b><span>Para Windows.</span></div>
-      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu para celular</b><span>Para Android, con tus mismos datos por Google Drive.</span></div>
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para compu</b><span>Para Windows.</span></div>
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para celular</b><span>Para Android, con tus mismos datos por Google Drive.</span></div>
       <div><span class="retro" style="color:var(--apagado)">EN EL TALLER</span><b>Nuevos desarrollos</b><span>Nuevas aplicaciones que reúnen, en un solo lugar, lo que usamos cada día.</span></div>
     </div>
   </section>
@@ -250,6 +287,7 @@
         <h2>Hola, soy Eric.</h2>
         <!-- CAMBIÁ ESTE PÁRRAFO POR TU PRESENTACIÓN -->
         <p>Soy Licenciado en Relaciones Internacionales, Diplomado en Psicología Social y Educación y Operador Socio-Comunitario, y hoy curso la Tecnicatura en Programación. Quipu nace de juntar esos mundos: pensar en las personas y resolver con tecnología los problemas concretos de todos los días.</p>
+        <p style="margin-top:14px">Quipu Estudio es mi sello como desarrollador: todo lo que creo lleva esta marca.</p>
       </div>
     </div>
   </section>
@@ -281,7 +319,7 @@
     </a>
     <div class="derecha">
       <a href="privacidad.html">Privacidad</a>
-      <small>© 2026 Quipu · Hecho en Argentina</small>
+      <small>© 2026 Quipu Estudio · Hecho en Argentina</small>
     </div>
   </div>
 </footer>
@@ -375,6 +413,22 @@
   });
 
   cargar();
+</script>
+<script>
+// Nueva versión: los datos salen del mismo novedades.json que lee la app del celu.
+// Si no se puede leer, la sección queda escondida.
+fetch("https://quipu-app.github.io/novedades.json", { cache: "no-store" })
+  .then((r) => r.json())
+  .then((d) => {
+    const a = d && d.android;
+    if (!a) return;
+    document.getElementById("nv-version").textContent = "NUEVA VERSIÓN · " + a.version;
+    document.getElementById("nv-resumen").textContent = a.resumen;
+    const seccion = document.getElementById("nueva-version");
+    seccion.hidden = false;
+    if (location.hash === "#nueva-version") seccion.scrollIntoView();
+  })
+  .catch(() => {});
 </script>
 </body>
 </html>
