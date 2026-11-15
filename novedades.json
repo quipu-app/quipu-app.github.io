@@ -1,7 +1,7 @@
 {
   "android": {
-    "version": "1.2.2",
-    "resumen": "Notas compartidas mediante código y arreglo para cambiar de personaje",
+    "version": "1.2.3",
+    "resumen": "Conexión con Drive más firme: repara tu archivo si se daña y avisa si algo falla",
     "enlace": "https://quipu-app.github.io/#nueva-version"
   }
 }
