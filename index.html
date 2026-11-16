@@ -165,6 +165,12 @@
     .nv-tarjeta { padding: 20px; }
     .nv-botones .boton { flex: 1 1 100%; text-align: center; }
   }
+
+  /* Quipu Lector de PDF */
+  #lector-pdf { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding: 0 24px 100px; scroll-margin-top: 90px; }
+  #lector-pdf .foto { flex: 1 1 380px; max-width: 480px; min-width: 0; margin: 0 auto; border-radius: 24px; }
+  #lector-pdf .info { flex: 999 1 460px; display: flex; flex-direction: column; gap: 22px; }
+  @media (max-width: 700px) { #lector-pdf { padding: 0 18px 56px; gap: 32px; } }
 </style>
 </head>
 <body>
@@ -174,6 +180,7 @@
     <a class="logo" href="#inicio" aria-label="Quipu, ir al inicio"><img src="img/placa.png" alt="Quipu"></a>
     <div class="links">
       <a href="#asistente">El asistente</a>
+      <a href="#lector-pdf">Lector de PDF</a>
       <a href="#personajes">Personajes</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#comentarios">Comentarios</a>
@@ -195,7 +202,7 @@
   <section class="crema">
     <div class="por-que">
       <h2>Por qué nace Quipu</h2>
-      <p>Los desarrollos más útiles nacen de un problema concreto. Cada app de Quipu parte de una pregunta: ¿qué herramientas usamos a diario que hoy están dispersas? La respuesta se convierte en una aplicación que las reúne en un solo lugar.</p>
+      <p>Los desarrollos más útiles nacen de un problema concreto. Cada app de Quipu Estudio nace de una pregunta: ¿qué herramientas usamos a diario que hoy están dispersas? La respuesta se convierte en una aplicación que las reúne en un solo lugar.</p>
     </div>
   </section>
 
@@ -249,6 +256,34 @@
     </div>
   </section>
 
+  <section id="lector-pdf" class="ancho">
+    <div class="info">
+      <span class="retro">QUIPU LECTOR DE PDF</span>
+      <h2>Tus apuntes en PDF, con la cartuchera a mano.</h2>
+      <p>Un lector de PDF pensado para estudiar: abrís tus apuntes, los marcás y los ordenás en carpetas. Si conectás tu Google Drive, te siguen de la compu a la tableta y al celu.</p>
+      <div class="funciones">
+        <div><b>Cartuchera</b><span>Anotaciones, marcas y subrayado sobre el PDF, y guardás el PDF con tus cambios.</span></div>
+        <div><b>Carpetas</b><span>Organización rápida de tus apuntes.</span></div>
+        <div><b>Lectura en voz alta</b><span>Escuchá tus apuntes, con un modo estudio.</span></div>
+        <div><b>Google Drive</b><span>Tus apuntes sincronizados en la nube.</span></div>
+      </div>
+      <div class="descarga">
+        <a class="boton" href="https://apps.microsoft.com/detail/9N3MC20N9JCC">Descargar para Windows</a>
+        <a class="boton boton-claro" href="https://github.com/quipu-app/quipu-lector-pdf/releases/latest/download/Quipu-Lector.apk">Descargar para Android</a>
+        <small>Gratis · Computadoras con Windows desde la Microsoft Store · Celulares y tabletas Android</small>
+      </div>
+      <details class="instalar">
+        <summary>¿Cómo instalo el lector en Android?</summary>
+        <ol>
+          <li>Desde el celu o la tableta, tocá <b>Descargar para Android</b> y abrí el archivo cuando termine.</li>
+          <li>Si Android avisa que no puede instalar apps de esa fuente, tocá <b>Configuración</b>, activá <b>Permitir de esta fuente</b> y volvé atrás.</li>
+          <li>Tocá <b>Instalar</b>. Si aparece Play Protect con “App no reconocida”, tocá <b>Más detalles</b> y después <b>Instalar de todas formas</b>.</li>
+        </ol>
+      </details>
+    </div>
+    <img class="foto" src="img/lector-pdf.jpg" alt="Quipu Lector de PDF en la compu, la tableta y el celular">
+  </section>
+
   <section id="personajes" class="ancho">
     <header>
       <span class="retro">LOS PERSONAJES</span>
@@ -275,6 +310,7 @@
     <div class="apps" style="margin-top:18px">
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para compu</b><span>Para Windows.</span></div>
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para celular</b><span>Para Android, con tus mismos datos por Google Drive.</span></div>
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Lector de PDF</b><span>Para Windows y Android: tus apuntes con anotaciones, carpetas y Google Drive.</span></div>
       <div><span class="retro" style="color:var(--apagado)">EN EL TALLER</span><b>Nuevos desarrollos</b><span>Nuevas aplicaciones que reúnen, en un solo lugar, lo que usamos cada día.</span></div>
     </div>
   </section>
@@ -286,8 +322,7 @@
         <span class="retro">SOBRE MÍ</span>
         <h2>Hola, soy Eric.</h2>
         <!-- CAMBIÁ ESTE PÁRRAFO POR TU PRESENTACIÓN -->
-        <p>Soy Licenciado en Relaciones Internacionales, Diplomado en Psicología Social y Educación y Operador Socio-Comunitario, y hoy curso la Tecnicatura en Programación. Quipu nace de juntar esos mundos: pensar en las personas y resolver con tecnología los problemas concretos de todos los días.</p>
-        <p style="margin-top:14px">Quipu Estudio es mi sello como desarrollador: todo lo que creo lleva esta marca.</p>
+        <p>Soy Licenciado en Relaciones Internacionales, Diplomado en Psicología Social y Educación y Operador Socio-Comunitario, y hoy curso la Tecnicatura en Programación. Quipu Estudio nace de juntar esos mundos: pensar en las personas y resolver con tecnología los problemas concretos de todos los días.</p>
       </div>
     </div>
   </section>
