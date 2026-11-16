@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.quipu_app.twa",
+    "sha256_cert_fingerprints": ["42:73:13:85:06:1C:7B:0D:01:BF:0E:C0:29:05:F9:FD:0E:8D:F4:09:DD:EB:0A:32:EC:1F:37:2C:D3:14:B9:D4"]
+  }
+}]
