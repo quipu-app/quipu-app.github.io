@@ -171,6 +171,12 @@
   #lector-pdf .foto { flex: 1 1 380px; max-width: 480px; min-width: 0; margin: 0 auto; border-radius: 24px; }
   #lector-pdf .info { flex: 999 1 460px; display: flex; flex-direction: column; gap: 22px; }
   @media (max-width: 700px) { #lector-pdf { padding: 0 18px 56px; gap: 32px; } }
+  
+  /* Quipu Office */
+  #quipu-office { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding: 0 24px 100px; scroll-margin-top: 90px; }
+  #quipu-office .foto { flex: 1 1 380px; max-width: 480px; min-width: 0; margin: 0 auto; border-radius: 24px; }
+  #quipu-office .info { flex: 999 1 460px; display: flex; flex-direction: column; gap: 22px; }
+  @media (max-width: 700px) { #quipu-office { padding: 0 18px 56px; gap: 32px; } }
 </style>
 </head>
 <body>
@@ -181,6 +187,7 @@
     <div class="links">
       <a href="#asistente">El asistente</a>
       <a href="#lector-pdf">Lector de PDF</a>
+      <a href="#quipu-office">Office</a>
       <a href="#personajes">Personajes</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#comentarios">Comentarios</a>
@@ -284,6 +291,34 @@
     <img class="foto" src="img/lector-pdf.jpg" alt="Quipu Lector de PDF en la compu, la tableta y el celular">
   </section>
 
+    <section id="quipu-office" class="ancho">
+    <img class="foto" src="img/quipu-office.jpg" alt="Quipu Office en la compu, la tableta y el celular">
+    <div class="info">
+      <span class="retro">QUIPU OFFICE</span>
+      <h2>Escribí, calculá y presentá, todo en un mismo lugar.</h2>
+      <p>Una oficina simple para estudiar y trabajar: textos, planillas y presentaciones en una sola app. Si conectás tu Google Drive, tus archivos te siguen de la compu al celu.</p>
+      <div class="funciones">
+        <div><b>QuipuTexto</b><span>Documentos con plantillas, dictado por voz y lectura en voz alta.</span></div>
+        <div><b>QuipuCálculo</b><span>Planillas con fórmulas como SUMA y PROMEDIO, y gráficos.</span></div>
+        <div><b>QuipuDiapositivas</b><span>Presentaciones con temas y modo pantalla completa.</span></div>
+        <div><b>Google Drive</b><span>Tus archivos sincronizados en la nube, y exportás a .DOC, .XLS y .PPTX.</span></div>
+      </div>
+      <div class="descarga">
+        <a class="boton" href="https://apps.microsoft.com/detail/9PHD33CS42WT">Descargar para Windows</a>
+        <a class="boton boton-claro" href="https://github.com/quipu-app/quipu-office/releases/latest/download/Quipu.Office.apk">Descargar para Android</a>
+        <small>Gratis · Computadoras con Windows desde la Microsoft Store · Celulares y tabletas Android</small>
+      </div>
+      <details class="instalar">
+        <summary>¿Cómo instalo Quipu Office en Android?</summary>
+        <ol>
+          <li>Desde el celu o la tableta, tocá <b>Descargar para Android</b> y abrí el archivo cuando termine.</li>
+          <li>Si Android avisa que no puede instalar apps de esa fuente, tocá <b>Configuración</b>, activá <b>Permitir de esta fuente</b> y volvé atrás.</li>
+          <li>Tocá <b>Instalar</b>. Si aparece Play Protect con “App no reconocida”, tocá <b>Más detalles</b> y después <b>Instalar de todas formas</b>.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
   <section id="personajes" class="ancho">
     <header>
       <span class="retro">LOS PERSONAJES</span>
@@ -311,6 +346,7 @@
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para compu</b><span>Para Windows.</span></div>
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Asistente para celular</b><span>Para Android, con tus mismos datos por Google Drive.</span></div>
       <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Lector de PDF</b><span>Para Windows y Android: tus apuntes con anotaciones, carpetas y Google Drive.</span></div>
+      <div class="lista"><span class="retro">DISPONIBLE</span><b>Quipu Office</b><span>Para Windows y Android: textos, planillas y presentaciones, con Google Drive.</span></div>
       <div><span class="retro" style="color:var(--apagado)">EN EL TALLER</span><b>Nuevos desarrollos</b><span>Nuevas aplicaciones que reúnen, en un solo lugar, lo que usamos cada día.</span></div>
     </div>
   </section>
