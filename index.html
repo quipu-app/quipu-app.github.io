@@ -449,21 +449,5 @@
 
   cargar();
 </script>
-<script>
-// Nueva versión: los datos salen del mismo novedades.json que lee la app del celu.
-// Si no se puede leer, la sección queda escondida.
-fetch("https://quipu-app.github.io/novedades.json", { cache: "no-store" })
-  .then((r) => r.json())
-  .then((d) => {
-    const a = d && d.android;
-    if (!a) return;
-    document.getElementById("nv-version").textContent = "NUEVA VERSIÓN · " + a.version;
-    document.getElementById("nv-resumen").textContent = a.resumen;
-    const seccion = document.getElementById("nueva-version");
-    seccion.hidden = false;
-    if (location.hash === "#nueva-version") seccion.scrollIntoView();
-  })
-  .catch(() => {});
-</script>
 </body>
 </html>
